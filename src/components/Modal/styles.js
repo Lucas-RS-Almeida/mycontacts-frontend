@@ -26,6 +26,7 @@ export const Container = styled.div`
   background: #FFF;
 
   h1 {
+    font-size: 18px;
     color: ${({ danger, theme }) => danger && theme.colors.danger.main};
   }
 `;
