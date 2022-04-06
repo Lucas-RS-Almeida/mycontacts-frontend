@@ -37,9 +37,7 @@ export default function Menu({ onCloseModal }) {
       await UserService.delete(user.id, token);
 
       handleLogout();
-    } catch (error) {
-      console.log(error.message);
-    }
+    } catch {}
   }
 
   return ReactDOM.createPortal(
