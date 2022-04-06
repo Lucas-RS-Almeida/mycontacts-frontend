@@ -93,7 +93,7 @@ export default function ResetPassword() {
   return (
     <C.Container>
       <Loader isLoading={isLoadingAPI} />
-      <h2>Redefinar senha</h2>
+      <h2>Redefinir senha</h2>
       <strong>Digite o código enviado para o seu e-mail</strong>
 
       {(errorAPI && !messageAPI) && (
