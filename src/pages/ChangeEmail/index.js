@@ -1,7 +1,5 @@
 import { useState, useContext } from 'react';
 
-import { useParams } from 'react-router-dom';
-
 import { Context } from '../../contexts/AuthContext';
 
 import { Container } from './styles';
@@ -25,8 +23,6 @@ export default function ChangeEmail() {
   const [isLoadingAPI, setIsLoadingAPI] = useState(false);
   const [errorAPI, setErrorAPI] = useState('');
   const [messageAPI, setMessageAPI] = useState('');
-
-  const { id } = useParams();
 
   const { token } = useContext(Context);
 
@@ -65,7 +61,7 @@ export default function ChangeEmail() {
     try {
       setIsLoadingAPI(true);
 
-      await UserService.changeEmail(id, { currentEmail, newEmail }, token);
+      await UserService.changeEmail({ currentEmail, newEmail }, token);
 
       setMessageAPI('E-mail alterado com sucesso!');
       setErrorAPI('');
