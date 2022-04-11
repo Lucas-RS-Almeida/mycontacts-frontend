@@ -29,7 +29,7 @@ export default function Menu({ onCloseModal }) {
 
   function handleTogglePage(pageName) {
     onCloseModal();
-    navigate(`/${pageName}/${user.id}`);
+    navigate(`/${pageName}`);
   }
 
   async function handleDeleteUser() {
@@ -37,7 +37,9 @@ export default function Menu({ onCloseModal }) {
       await UserService.delete(user.id, token);
 
       handleLogout();
-    } catch {}
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   return ReactDOM.createPortal(
