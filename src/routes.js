@@ -57,7 +57,7 @@ export default function CustomRoutes() {
         )}
       />
       <Route
-        path="/changeemail/:id"
+        path="/changeemail"
         element={(
           <PrivateRoute
             authenticated={authenticated}
@@ -67,7 +67,7 @@ export default function CustomRoutes() {
         )}
       />
       <Route
-        path="/changepassword/:id"
+        path="/changepassword"
         element={(
           <PrivateRoute
             authenticated={authenticated}
