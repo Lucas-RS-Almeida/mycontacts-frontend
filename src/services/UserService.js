@@ -5,12 +5,12 @@ class UserService {
     this.httpClient = new HttpClient(process.env.REACT_APP_API_URL);
   }
 
-  async changePassword(id, body, token) {
-    return this.httpClient.put(`/users/change-password/${id}`, body, token);
+  async changePassword(body, token) {
+    return this.httpClient.put('/users/change-password', body, token);
   }
 
-  async changeEmail(id, body, token) {
-    return this.httpClient.put(`/users/change-email/${id}`, body, token);
+  async changeEmail(body, token) {
+    return this.httpClient.put('/users/change-email', body, token);
   }
 
   async forgoutPassword(email) {
