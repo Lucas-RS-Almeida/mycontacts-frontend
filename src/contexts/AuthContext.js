@@ -1,11 +1,22 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { createContext, useState, useEffect } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 
 import AuthService from '../services/AuthService';
+import UserService from '../services/UserService';
 
 export const Context = createContext();
+
+const navigate = useNavigate();
+
+function handleLogout() {
+  navigate('/');
+  localStorage.clear();
+  window.location.reload();
+}
 
 export default function AuthProvider({ children }) {
   const [userArr, setUserArr] = useState({});
@@ -16,21 +27,22 @@ export default function AuthProvider({ children }) {
   const [isLoadingUser, setIsLoadingUser] = useState(false);
 
   useEffect(() => {
-    setAuthenticated(
-      (localStorage.getItem('token') !== null),
-    );
+    async function getMe() {
+      try {
+        const token = JSON.parse(localStorage.getItem('token')) || undefined;
 
-    setUserArr(
-      (localStorage.getItem('user') !== null)
-        ? JSON.parse(localStorage.getItem('user'))
-        : {},
-    );
+        const response = await UserService.getMe(token);
 
-    setTokenLoad(
-      (localStorage.getItem('token') !== null)
-        ? JSON.parse(localStorage.getItem('token'))
-        : '',
-    );
+        setTokenLoad(token);
+        setUserArr(response);
+        setAuthenticated(true);
+      } catch (error) {
+        handleLogout();
+        setErrorAPI(error.message);
+      }
+    }
+
+    getMe();
   }, []);
 
   async function handleLogin({ email, password }) {
