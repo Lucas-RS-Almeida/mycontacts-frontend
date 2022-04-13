@@ -4,6 +4,10 @@ class UserService {
   constructor() {
     this.httpClient = new HttpClient(process.env.REACT_APP_API_URL);
   }
+  
+  async getMe(token) {
+    return this.httpClient.get('/users', token);
+  }
 
   async changePassword(body, token) {
     return this.httpClient.put('/users/change-password', body, token);
