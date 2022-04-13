@@ -1,22 +1,12 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { createContext, useState, useEffect } from 'react';
 
-import { useNavigate } from 'react-router-dom';
-
 import PropTypes from 'prop-types';
 
 import AuthService from '../services/AuthService';
 import UserService from '../services/UserService';
 
 export const Context = createContext();
-
-const navigate = useNavigate();
-
-function handleLogout() {
-  navigate('/');
-  localStorage.clear();
-  window.location.reload();
-}
 
 export default function AuthProvider({ children }) {
   const [userArr, setUserArr] = useState({});
@@ -36,9 +26,8 @@ export default function AuthProvider({ children }) {
         setTokenLoad(token);
         setUserArr(response);
         setAuthenticated(true);
-      } catch (error) {
-        handleLogout();
-        setErrorAPI(error.message);
+      } catch {
+        localStorage.clear();
       }
     }
 
